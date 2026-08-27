@@ -161,6 +161,10 @@
     .polaroid-wrap:nth-child(14) .polaroid { transform: rotate(2deg); }
     .polaroid-wrap:nth-child(15) .polaroid { transform: rotate(-1.5deg); }
     .polaroid-wrap:nth-child(16) .polaroid { transform: rotate(3deg); }
+    .polaroid-wrap:nth-child(17) .polaroid { transform: rotate(-2deg); }
+    .polaroid-wrap:nth-child(18) .polaroid { transform: rotate(1.5deg); }
+    .polaroid-wrap:nth-child(19) .polaroid { transform: rotate(-3deg); }
+    .polaroid-wrap:nth-child(20) .polaroid { transform: rotate(2.5deg); }
     .polaroid:hover {
       transform: rotate(0deg) scale(1.06) !important;
       box-shadow: 0 20px 50px rgba(124,58,237,0.25), 0 5px 15px rgba(0,0,0,0.1);
@@ -362,7 +366,7 @@
     <span class="hero-frog">🐸💕</span>
     <h1 class="hero-title">in every universe<br>i still love u, Vanka 💜</h1>
     <p class="hero-sub">✨ a tiny gallery of our cutest moments ✨</p>
-    <a href="#gallery" class="hero-btn" onclick="event.preventDefault(); openLightbox(Math.floor(Math.random()*16))">lihat foto kita! 📷🌸</a>
+    <a href="#gallery" class="hero-btn" onclick="event.preventDefault(); openLightbox(Math.floor(Math.random()*20))">lihat foto kita! 📷🌸</a>
     <div class="scroll-down" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">💜</div>
   </section>
 
@@ -411,13 +415,17 @@
       "bestest person ever 💕",
       "forever & always 🌸",
       "i love u, Vanka 💜",
+      "the cutest duo 🫶",
+      "wherever u are 🌙",
+      "us against the world 🌍",
+      "til the end of time 💜",
     ];
 
-    const stickers = ["🌸","💕","✨","🐸","💜","🌊","🦋","🍀","⭐","🎀","💙","🌙","🫧","🌺","💫","🪷"];
+    const stickers = ["🌸","💕","✨","🐸","💜","🌊","🦋","🍀","⭐","🎀","💙","🌙","🫧","🌺","💫","🪷","🫶","🌈","🎐","💌"];
     const grid = document.getElementById('polaroidGrid');
     let currentIndex = 0;
 
-    for (let i = 1; i <= 16; i++) {
+    for (let i = 1; i <= 20; i++) {
       const num = String(i).padStart(2, '0');
       const wrap = document.createElement('div');
       wrap.className = 'polaroid-wrap';
@@ -446,7 +454,7 @@
       document.getElementById('lightboxImg').src = 'img/' + num + '.jpg';
       document.getElementById('lightboxCaption').textContent = captions[currentIndex];
       const counter = document.getElementById('lightboxCounter');
-      if (counter) counter.textContent = (currentIndex + 1) + ' / 16';
+      if (counter) counter.textContent = (currentIndex + 1) + ' / 20';
     }
 
     // ===== TOUCH SWIPE =====
@@ -475,7 +483,7 @@
     }
 
     function navigate(dir) {
-      currentIndex = (currentIndex + dir + 16) % 16;
+      currentIndex = (currentIndex + dir + 20) % 20;
       const img = document.getElementById('lightboxImg');
       img.style.opacity = 0;
       setTimeout(() => {
@@ -515,7 +523,7 @@
 
   <!-- MUSIC PLAYER -->
   <iframe id="yt-player"
-    src="https://www.youtube.com/embed/Kp2YwrhFHUI?start=193&enablejsapi=1&autoplay=0&loop=1&playlist=Kp2YwrhFHUI&controls=0&rel=0"
+    src="https://www.youtube.com/embed/Kp2YwrhFHUI?enablejsapi=1&autoplay=0&loop=1&playlist=Kp2YwrhFHUI&controls=0&rel=0"
     allow="autoplay; encrypted-media"
     frameborder="0">
   </iframe>
@@ -548,7 +556,6 @@
       const btn = document.getElementById('musicBtn');
       const toast = document.getElementById('musicToast');
       if (!isPlaying) {
-        player.seekTo(193, true);
         player.playVideo();
         isPlaying = true;
         btn.textContent = '🎶';
