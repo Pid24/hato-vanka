@@ -4,7 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>In Every Universe I Still Love U Vanka 🐸💕</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- OG Meta Tags -->
+  <meta property="og:title" content="in every universe i still love u, Vanka 💜" />
+  <meta property="og:description" content="a tiny gallery of our cutest moments 🐸🌸" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#c084fc" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap&font-display=swap" rel="stylesheet" />
   <style>
     :root {
       --pink: #f9a8d4;
@@ -52,15 +58,6 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center; padding: 2rem;
-    }
-    .hero-badge {
-      display: inline-block; background: white;
-      border: 2px solid var(--pink); color: #be185d;
-      border-radius: 99px; padding: 0.4rem 1.2rem;
-      font-size: 0.85rem; font-weight: 700;
-      margin-bottom: 1.5rem; letter-spacing: 0.05em;
-      box-shadow: 0 2px 10px rgba(249,168,212,0.4);
-      animation: bounceIn 0.8s cubic-bezier(0.34,1.56,0.64,1);
     }
     .hero-frog {
       font-size: 4.5rem; margin-bottom: 1rem; display: block;
@@ -304,6 +301,33 @@
       .lightbox-prev, .lightbox-next { display: none; }
       .lightbox-bottom-nav { display: flex !important; }
       .lightbox-caption { font-size: 1rem; }
+      .swipe-hint { display: block; }
+    }
+
+    /* ===== LIGHTBOX BOTTOM NAV ===== */
+    .lightbox-bottom-nav {
+      position: absolute;
+      bottom: -64px; left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .lightbox-counter {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: white;
+      min-width: 3.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    .swipe-hint {
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.72rem;
+      font-family: 'Nunito', sans-serif;
+      margin-top: 0.6rem;
+      display: none;
     }
 
     /* ===== MUSIC PLAYER ===== */
@@ -316,7 +340,8 @@
     }
     .music-btn {
       position: fixed;
-      bottom: 1.4rem; right: 1.4rem;
+      bottom: calc(1.4rem + env(safe-area-inset-bottom));
+      right: 1.4rem;
       z-index: 999;
       width: 52px; height: 52px;
       border-radius: 50%;
@@ -338,7 +363,8 @@
     }
     .music-toast {
       position: fixed;
-      bottom: 5rem; right: 1.4rem;
+      bottom: calc(5rem + env(safe-area-inset-bottom));
+      right: 1.4rem;
       background: rgba(74,48,96,0.85);
       backdrop-filter: blur(6px);
       color: white;
@@ -355,6 +381,15 @@
     }
     .music-toast.show {
       opacity: 1; transform: translateY(0);
+    }
+
+    /* Respect user motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .particle { display: none; }
+      .hero-frog { animation: none; }
+      .footer-heart { animation: none; }
+      .music-btn.playing { animation: none; }
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
     }
   </style>
 </head>
@@ -391,10 +426,11 @@
       <div class="lightbox-caption" id="lightboxCaption"></div>
       <div class="lightbox-bottom-nav" style="display:none">
         <button class="lightbox-nav" onclick="navigate(-1)">‹</button>
-        <span class="lightbox-counter" id="lightboxCounter">1 / 16</span>
+        <span class="lightbox-counter" id="lightboxCounter">1 / 20</span>
         <button class="lightbox-nav" onclick="navigate(1)">›</button>
       </div>
     </div>
+    <div class="swipe-hint" id="swipeHint">geser kiri / kanan untuk pindah foto 👆</div>
   </div>
 
   <script>
@@ -474,7 +510,9 @@
     }, { passive: true });
 
     function closeLightbox(e) {
-      if (e.target === document.getElementById('lightbox')) closeLightboxBtn();
+      // Close if tapping the dark overlay (not the inner card)
+      const inner = document.getElementById('lightboxInner');
+      if (!inner.contains(e.target)) closeLightboxBtn();
     }
 
     function closeLightboxBtn() {
@@ -517,8 +555,17 @@
       setTimeout(() => el.remove(), (dur + 5) * 1000);
     }
 
-    for (let i = 0; i < 25; i++) setTimeout(createParticle, Math.random() * 3000);
-    setInterval(createParticle, 800);
+    for (let i = 0; i < 20; i++) setTimeout(createParticle, Math.random() * 3000);
+    let particleInterval = setInterval(createParticle, 1500);
+
+    // Pause particles when tab is hidden (save battery)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearInterval(particleInterval);
+      } else {
+        particleInterval = setInterval(createParticle, 1500);
+      }
+    });
   </script>
 
   <!-- MUSIC PLAYER -->
@@ -552,7 +599,13 @@
     }
 
     function toggleMusic() {
-      if (!ytReady) return;
+      if (!ytReady) {
+        const toast = document.getElementById('musicToast');
+        toast.textContent = '⏳ memuat musik...';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+        return;
+      }
       const btn = document.getElementById('musicBtn');
       const toast = document.getElementById('musicToast');
       if (!isPlaying) {
