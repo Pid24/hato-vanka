@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In Every Universe I Still Love U Vanka 🐸💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #f9a8d4;
+      --pink-light: #fce7f3;
+      --lavender: #c4b5fd;
+      --lavender-light: #ede9fe;
+      --cream: #fff7ed;
+      --text: #4a3060;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: linear-gradient(135deg, #fce7f3 0%, #ede9fe 50%, #fce7f3 100%);
+      background-attachment: fixed;
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* PARTICLES */
+    .particle-container {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      animation: floatUp linear infinite;
+      opacity: 0; font-size: 1.2rem; user-select: none;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.8; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* HERO */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+    }
+    .hero-badge {
+      display: inline-block; background: white;
+      border: 2px solid var(--pink); color: #be185d;
+      border-radius: 99px; padding: 0.4rem 1.2rem;
+      font-size: 0.85rem; font-weight: 700;
+      margin-bottom: 1.5rem; letter-spacing: 0.05em;
+      box-shadow: 0 2px 10px rgba(249,168,212,0.4);
+      animation: bounceIn 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .hero-frog {
+      font-size: 4.5rem; margin-bottom: 1rem; display: block;
+      animation: frogBounce 2s ease-in-out infinite;
+    }
+    @keyframes frogBounce {
+      0%,100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+    .hero-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 700; line-height: 1.2; color: #7c3aed;
+      text-shadow: 3px 3px 0px rgba(249,168,212,0.6);
+      margin-bottom: 1rem;
+      animation: slideIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(30px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+    .hero-sub {
+      font-size: 1rem; color: #9333ea; opacity: 0.8;
+      margin-bottom: 2.5rem;
+      animation: slideIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.4s both;
+    }
+    .hero-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #f472b6, #c084fc);
+      color: white; font-family: 'Caveat', cursive;
+      font-size: 1.3rem; font-weight: 700;
+      padding: 0.8rem 2.2rem; border-radius: 99px;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(196,181,253,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: slideIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.6s both;
+    }
+    .hero-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(196,181,253,0.7);
+    }
+    .scroll-down {
+      position: absolute; bottom: 2rem;
+      font-size: 1.8rem;
+      animation: bounce 1.5s ease-in-out infinite; cursor: pointer;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* SECTION DIVIDER */
+    .section-divider {
+      text-align: center; font-family: 'Caveat', cursive;
+      font-size: 1.5rem; color: #9333ea;
+      padding: 3rem 1rem 1rem; position: relative; z-index: 1;
+    }
+    .section-divider span {
+      background: linear-gradient(135deg, #f472b6, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* GALLERY */
+    .gallery-section {
+      position: relative; z-index: 1;
+      padding: 1rem 2rem 4rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 2rem; padding: 1rem;
+    }
+    .polaroid-wrap { display: flex; justify-content: center; }
+    .polaroid {
+      background: white;
+      padding: 12px 12px 55px 12px;
+      box-shadow: 0 8px 25px rgba(124,58,237,0.15), 0 2px 8px rgba(0,0,0,0.08);
+      border-radius: 4px; max-width: 260px; width: 100%;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+      cursor: pointer; position: relative;
+    }
+    .polaroid-wrap:nth-child(1)  .polaroid { transform: rotate(-3deg); }
+    .polaroid-wrap:nth-child(2)  .polaroid { transform: rotate(2.5deg); }
+    .polaroid-wrap:nth-child(3)  .polaroid { transform: rotate(-1.5deg); }
+    .polaroid-wrap:nth-child(4)  .polaroid { transform: rotate(3.5deg); }
+    .polaroid-wrap:nth-child(5)  .polaroid { transform: rotate(-2deg); }
+    .polaroid-wrap:nth-child(6)  .polaroid { transform: rotate(1.5deg); }
+    .polaroid-wrap:nth-child(7)  .polaroid { transform: rotate(-3.5deg); }
+    .polaroid-wrap:nth-child(8)  .polaroid { transform: rotate(2deg); }
+    .polaroid-wrap:nth-child(9)  .polaroid { transform: rotate(-1deg); }
+    .polaroid-wrap:nth-child(10) .polaroid { transform: rotate(3deg); }
+    .polaroid-wrap:nth-child(11) .polaroid { transform: rotate(-2.5deg); }
+    .polaroid-wrap:nth-child(12) .polaroid { transform: rotate(1deg); }
+    .polaroid-wrap:nth-child(13) .polaroid { transform: rotate(-3deg); }
+    .polaroid-wrap:nth-child(14) .polaroid { transform: rotate(2deg); }
+    .polaroid-wrap:nth-child(15) .polaroid { transform: rotate(-1.5deg); }
+    .polaroid-wrap:nth-child(16) .polaroid { transform: rotate(3deg); }
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.06) !important;
+      box-shadow: 0 20px 50px rgba(124,58,237,0.25), 0 5px 15px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .polaroid img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block; border-radius: 2px;
+    }
+    .polaroid-caption {
+      position: absolute; bottom: 10px; left: 0; right: 0;
+      text-align: center; font-family: 'Caveat', cursive;
+      font-size: 1rem; color: #9333ea; font-weight: 600; padding: 0 8px;
+    }
+    .polaroid-sticker {
+      position: absolute; top: -10px; right: -8px;
+      font-size: 1.4rem; transform: rotate(15deg);
+    }
+    .tape {
+      position: absolute; top: -12px; left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+      width: 50px; height: 18px;
+      background: rgba(196,181,253,0.45); border-radius: 3px;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(74,48,96,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000; align-items: center;
+      justify-content: center; padding: 1rem;
+    }
+    .lightbox.active {
+      display: flex; animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    .lightbox-inner {
+      background: white; padding: 16px 16px 65px 16px;
+      border-radius: 4px; max-width: 680px; width: 100%;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.7) rotate(-5deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    .lightbox-inner img { width: 100%; border-radius: 2px; display: block; }
+    .lightbox-caption {
+      position: absolute; bottom: 14px; left: 0; right: 0;
+      text-align: center; font-family: 'Caveat', cursive;
+      font-size: 1.3rem; color: #9333ea; font-weight: 700;
+    }
+    .lightbox-close {
+      position: absolute; top: -18px; right: -18px;
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, #f472b6, #c084fc);
+      border: 3px solid white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; cursor: pointer; color: white;
+      box-shadow: 0 4px 12px rgba(196,181,253,0.5);
+      font-weight: bold; transition: transform 0.2s;
+    }
+    .lightbox-close:hover { transform: scale(1.2) rotate(90deg); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: linear-gradient(135deg, #f472b6, #c084fc);
+      color: white; border: none; width: 38px; height: 38px;
+      border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(196,181,253,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .lightbox-nav:hover {
+      transform: translateY(-50%) scale(1.15);
+      box-shadow: 0 6px 20px rgba(196,181,253,0.7);
+    }
+    .lightbox-prev { left: -22px; }
+    .lightbox-next { right: -22px; }
+
+    /* FOOTER */
+    .footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 3rem 1rem 4rem;
+    }
+    .footer-heart {
+      font-size: 3.5rem; display: block; margin-bottom: 0.5rem;
+      animation: heartbeat 1.2s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      25% { transform: scale(1.15); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.1); }
+    }
+    .footer-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem; color: #7c3aed; font-weight: 700;
+    }
+    .footer-sub { font-size: 0.9rem; color: #a78bfa; margin-top: 0.5rem; }
+
+    @keyframes bounceIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    /* ===== MOBILE FIRST ===== */
+    @media (max-width: 639px) {
+      body { -webkit-tap-highlight-color: transparent; }
+      .hero { min-height: 100svh; padding: 2rem 1.2rem; }
+      .hero-frog { font-size: clamp(3.5rem, 15vw, 4.5rem); }
+      .hero-title { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+      .hero-sub { font-size: 0.88rem; }
+      .hero-btn { font-size: 1.1rem; padding: 0.85rem 1.8rem; min-height: 48px; }
+      .scroll-down { bottom: 1.5rem; }
+
+      .gallery-section { padding: 0.5rem 0.8rem 5rem; }
+      .section-divider { padding: 2rem 1rem 0.5rem; font-size: 1.2rem; }
+      .polaroid-grid { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; padding: 0.8rem 0.2rem; }
+      .polaroid { padding: 9px 9px 48px 9px; }
+      .polaroid-caption { font-size: 0.8rem; bottom: 7px; }
+      .polaroid-sticker { font-size: 1.1rem; top: -8px; right: -5px; }
+      .polaroid:active { transform: rotate(0deg) scale(0.96) !important; }
+
+      /* full screen lightbox on mobile */
+      .lightbox { padding: 1rem 1rem 7rem; align-items: flex-start; padding-top: 3rem; }
+      .lightbox-inner {
+        width: 100%;
+        padding: 10px 10px 55px 10px;
+        border-radius: 10px;
+      }
+      .lightbox-close { top: -14px; right: -10px; width: 42px; height: 42px; }
+      /* move nav to bottom bar */
+      .lightbox-prev, .lightbox-next { display: none; }
+      .lightbox-bottom-nav { display: flex !important; }
+      .lightbox-caption { font-size: 1rem; }
+    }
+
+    /* ===== MUSIC PLAYER ===== */
+    #yt-player {
+      position: fixed;
+      bottom: -100px; left: -100px;
+      width: 1px; height: 1px;
+      opacity: 0; pointer-events: none;
+      z-index: -1;
+    }
+    .music-btn {
+      position: fixed;
+      bottom: 1.4rem; right: 1.4rem;
+      z-index: 999;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f472b6, #c084fc);
+      border: 3px solid white;
+      box-shadow: 0 4px 20px rgba(196,181,253,0.6);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .music-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(196,181,253,0.8); }
+    .music-btn:active { transform: scale(0.93); }
+    .music-btn.playing { animation: musicPulse 1.8s ease-in-out infinite; }
+    @keyframes musicPulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(196,181,253,0.6); }
+      50%      { box-shadow: 0 4px 30px rgba(244,114,182,0.9), 0 0 0 8px rgba(244,114,182,0.15); }
+    }
+    .music-toast {
+      position: fixed;
+      bottom: 5rem; right: 1.4rem;
+      background: rgba(74,48,96,0.85);
+      backdrop-filter: blur(6px);
+      color: white;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      z-index: 998;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    .music-toast.show {
+      opacity: 1; transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="particle-container" id="particles"></div>
+
+  <section class="hero">
+    <span class="hero-frog">🐸💕</span>
+    <h1 class="hero-title">in every universe<br>i still love u, Vanka 💜</h1>
+    <p class="hero-sub">✨ a tiny gallery of our cutest moments ✨</p>
+    <a href="#gallery" class="hero-btn" onclick="event.preventDefault(); openLightbox(Math.floor(Math.random()*16))">lihat foto kita! 📷🌸</a>
+    <div class="scroll-down" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">💜</div>
+  </section>
+
+  <section class="gallery-section" id="gallery">
+    <div class="section-divider"><span>🌸 our polaroid wall 🌸</span></div>
+    <div class="polaroid-grid" id="polaroidGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-heart">💜</span>
+    <p class="footer-text">always & forever, in every universe 🌌</p>
+    <p class="footer-sub">made with tons of love 🐸🌸</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner" id="lightboxInner">
+      <div class="tape"></div>
+      <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
+      <button class="lightbox-nav lightbox-prev" onclick="navigate(-1)">‹</button>
+      <button class="lightbox-nav lightbox-next" onclick="navigate(1)">›</button>
+      <img id="lightboxImg" src="" alt="" />
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+      <div class="lightbox-bottom-nav" style="display:none">
+        <button class="lightbox-nav" onclick="navigate(-1)">‹</button>
+        <span class="lightbox-counter" id="lightboxCounter">1 / 16</span>
+        <button class="lightbox-nav" onclick="navigate(1)">›</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const captions = [
+      "together in our world 💙",
+      "pinky promise 🌸",
+      "my fav person 🐸",
+      "always side by side 💜",
+      "you + me = 🥹",
+      "our lil adventure 🌊",
+      "cutie patootie 💕",
+      "never letting go 🌸",
+      "sunshine & stars ✨",
+      "froggy love 🐸💚",
+      "in every universe 🌌",
+      "just us two 💜",
+      "my whole world 🌏",
+      "bestest person ever 💕",
+      "forever & always 🌸",
+      "i love u, Vanka 💜",
+    ];
+
+    const stickers = ["🌸","💕","✨","🐸","💜","🌊","🦋","🍀","⭐","🎀","💙","🌙","🫧","🌺","💫","🪷"];
+    const grid = document.getElementById('polaroidGrid');
+    let currentIndex = 0;
+
+    for (let i = 1; i <= 16; i++) {
+      const num = String(i).padStart(2, '0');
+      const wrap = document.createElement('div');
+      wrap.className = 'polaroid-wrap';
+      const card = document.createElement('div');
+      card.className = 'polaroid';
+      card.innerHTML = `
+        <div class="tape"></div>
+        <span class="polaroid-sticker">${stickers[i-1]}</span>
+        <img src="img/${num}.jpg" alt="foto ${num}" loading="lazy" />
+        <div class="polaroid-caption">${captions[i-1]}</div>
+      `;
+      card.addEventListener('click', () => openLightbox(i - 1));
+      wrap.appendChild(card);
+      grid.appendChild(wrap);
+    }
+
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightbox() {
+      const num = String(currentIndex + 1).padStart(2, '0');
+      document.getElementById('lightboxImg').src = 'img/' + num + '.jpg';
+      document.getElementById('lightboxCaption').textContent = captions[currentIndex];
+      const counter = document.getElementById('lightboxCounter');
+      if (counter) counter.textContent = (currentIndex + 1) + ' / 16';
+    }
+
+    // ===== TOUCH SWIPE =====
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const lb = document.getElementById('lightbox');
+    lb.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        navigate(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
+
+    function closeLightbox(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightboxBtn();
+    }
+
+    function closeLightboxBtn() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      currentIndex = (currentIndex + dir + 16) % 16;
+      const img = document.getElementById('lightboxImg');
+      img.style.opacity = 0;
+      setTimeout(() => {
+        updateLightbox();
+        img.style.transition = 'opacity 0.2s';
+        img.style.opacity = 1;
+      }, 150);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'Escape') closeLightboxBtn();
+    });
+
+    // floating particles
+    const emojis = ['💕','🌸','✨','💜','🐸','💙','🌺','⭐','🫧','🍀'];
+    const container = document.getElementById('particles');
+
+    function createParticle() {
+      const el = document.createElement('div');
+      el.className = 'particle';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+      const dur = 8 + Math.random() * 10;
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = (Math.random() * dur) + 's';
+      container.appendChild(el);
+      setTimeout(() => el.remove(), (dur + 5) * 1000);
+    }
+
+    for (let i = 0; i < 25; i++) setTimeout(createParticle, Math.random() * 3000);
+    setInterval(createParticle, 800);
+  </script>
+
+  <!-- MUSIC PLAYER -->
+  <iframe id="yt-player"
+    src="https://www.youtube.com/embed/Kp2YwrhFHUI?start=193&enablejsapi=1&autoplay=0&loop=1&playlist=Kp2YwrhFHUI&controls=0&rel=0"
+    allow="autoplay; encrypted-media"
+    frameborder="0">
+  </iframe>
+
+  <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="play / pause musik">
+    🎵
+  </button>
+  <div class="music-toast" id="musicToast">▶ musik on 🎶</div>
+
+  <script>
+    let isPlaying = false;
+    let player;
+    let ytReady = false;
+
+    // Load YT IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        events: {
+          onReady: () => { ytReady = true; }
+        }
+      });
+    }
+
+    function toggleMusic() {
+      if (!ytReady) return;
+      const btn = document.getElementById('musicBtn');
+      const toast = document.getElementById('musicToast');
+      if (!isPlaying) {
+        player.seekTo(193, true);
+        player.playVideo();
+        isPlaying = true;
+        btn.textContent = '🎶';
+        btn.classList.add('playing');
+        toast.textContent = '▶ musik on 🎶';
+      } else {
+        player.pauseVideo();
+        isPlaying = false;
+        btn.textContent = '🎵';
+        btn.classList.remove('playing');
+        toast.textContent = '⏸ musik off';
+      }
+      // show toast
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+  </script>
+</body>
+</html>
