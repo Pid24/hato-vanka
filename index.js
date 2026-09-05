@@ -3,6 +3,69 @@
    in every universe i still love u, Vanka 💜
    ============================================= */
 
+/* ===== LOADING SCREEN ===== */
+(function () {
+  const screen   = document.getElementById('loadingScreen');
+  const flowers  = ['🌸','🌺','🌼','🌷','🪷','🌻','💐','🌹','🏵️','💮'];
+  const elements = [];
+  const COUNT    = 55; // jumlah bunga di layar
+
+  // Spawn flowers at random positions
+  for (let i = 0; i < COUNT; i++) {
+    const el = document.createElement('div');
+    el.className = 'loader-flower';
+    el.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+    const x  = Math.random() * 100;   // % dari kiri
+    const y  = Math.random() * 100;   // % dari atas
+    const sz = 1.4 + Math.random() * 2.2; // ukuran font 1.4–3.6rem
+    const delay = Math.random() * 1.4;    // stagger animasi
+
+    el.style.cssText = `
+      left: ${x}%;
+      top:  ${y}%;
+      font-size: ${sz}rem;
+      animation-delay: ${delay}s;
+      animation-duration: ${1.6 + Math.random() * 1}s;
+    `;
+
+    // Simpan arah ledakan untuk CSS variable
+    const angleRad = Math.atan2(y - 50, x - 50);
+    const dist     = 80 + Math.random() * 120;
+    el.style.setProperty('--ex', `${Math.cos(angleRad) * dist}px`);
+    el.style.setProperty('--ey', `${Math.sin(angleRad) * dist}px`);
+    el.style.setProperty('--er', `${-180 + Math.random() * 360}deg`);
+
+    screen.appendChild(el);
+    elements.push(el);
+  }
+
+  // Trigger dismiss: explode all flowers, then fade overlay
+  function dismissLoader() {
+    elements.forEach(el => el.classList.add('explode'));
+
+    // Fade out overlay setelah bunga mulai meledak
+    setTimeout(() => screen.classList.add('hide'), 300);
+
+    // Remove dari DOM sepenuhnya setelah selesai
+    setTimeout(() => screen.remove(), 750);
+  }
+
+  // Tunggu halaman siap + minimal 1.8 detik biar efek keliatan
+  let pageReady    = false;
+  let minTimeDone  = false;
+
+  window.addEventListener('load', () => {
+    pageReady = true;
+    if (minTimeDone) dismissLoader();
+  });
+
+  setTimeout(() => {
+    minTimeDone = true;
+    if (pageReady) dismissLoader();
+  }, 1800);
+})();
+
 /* ===== DATA ===== */
 const TOTAL_PHOTOS = 20;
 

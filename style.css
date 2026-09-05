@@ -531,3 +531,47 @@ body {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ===== LOADING SCREEN ===== */
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #fce7f3 0%, #ede9fe 50%, #fce7f3 100%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.4s ease;
+}
+
+#loadingScreen.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-flower {
+  position: absolute;
+  font-size: 2rem;
+  animation: flowerFloat 2s ease-in-out infinite alternate;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+@keyframes flowerFloat {
+  0%   { transform: translateY(0px) rotate(0deg) scale(1); }
+  100% { transform: translateY(-18px) rotate(20deg) scale(1.1); }
+}
+
+/* Explosion: each flower blasts outward */
+.loader-flower.explode {
+  animation: flowerExplode 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+@keyframes flowerExplode {
+  0%   { transform: scale(1); opacity: 1; }
+  60%  { opacity: 1; }
+  100% { transform: scale(3.5) translate(var(--ex), var(--ey)) rotate(var(--er));
+         opacity: 0; }
+}
